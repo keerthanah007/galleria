@@ -1,0 +1,109 @@
+{% include 'adminheader.html' %}
+
+
+
+<center>
+    
+    <h3>Add Image</h3>
+    <form method="post" id="form-reg">
+        <div id="reg">
+        <table class="table" style="width:500px">
+            <tr>
+                <th> Art </th>
+                <td><select name="item" id="">
+                 <option value="">---Select---</option>
+                    {% for row in data['itemdrop']%}
+                    <option value="{{row['item_id']}}">{{row['item_name']}}</option>
+                    {% endfor %}
+        </select></td>
+            </tr>
+            
+            <tr>
+                <th>Venu</th>
+                <td><input type="text" class="form-control" required=""  readonly value="{{data['evenu']}}" name="venu"></td>
+            </tr>
+            
+            <tr>
+                <th>Date</th>
+                <td><input type="date" class="form-control" required="" value="{{data['edate']}}" name="date" ></td>
+            </tr>
+           
+            <tr>
+                <th>Entry Fee</th>
+                <td><input type="text" class="form-control" value="{{data['ticket']}}" required=""  name="fee"></td>
+            </tr>
+            
+    
+            <td align="center"  colspan="2"><input class="btn btn-primary" type="submit" name="art" value="submit" ></td>
+        </table>
+        </div>
+    </form>
+    </center> 
+
+
+
+    <center>
+        <div class="hope">
+            
+        
+        <h1>Exhibition</h1>
+        <table class="table table-dark" style="width: 700px">
+            <tr>
+                <th>Slno.</th>
+                <th>Name</th>
+                <th>Artist</th>
+                <th>Image</th>
+                <th></th>
+                
+            </tr>
+           {% for row in data['views'] %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{row['item_name']}}</td>
+                <td>{{row['u_fname']}}</td>
+                <td><img src="/{{row['item_image']}}" alt=""></td>
+                <td><a href="?action=remove&iid={{row['item_id']}}&evenu={{ data['evenu'] }}&ticket={{ data['ticket'] }}&edate={{ data['edate'] }}&id={{ data['id'] }}" class="btn btn-danger">Remove</a></td>
+                
+            </tr>
+            {%endfor%}
+            </table>
+        </div>
+    </center>
+
+
+    {% with messages = get_flashed_messages() %}
+	{% if messages %}
+		{% for message in messages %}
+			<script>alert("{{ message }}")</script>
+		{% endfor %}
+	{% endif %}
+{% endwith %}
+
+    <style type="text/css">
+        #form-reg{
+            background: url('/static/assets/images/banner-mid.jpg');
+            padding:1rem .4rem;
+            background-size: cover;
+        }
+    
+        #reg{
+            background: rgba(0,0,0,.3);
+            width: 60%;
+            border-radius:6px;
+            color: #fff !important;
+    
+        }
+        .form-control{
+            /*background: red !important;*/
+            width: 100%
+        }
+        .hope{
+            
+            background: rgba(0, 0, 0, .2);
+    
+        }
+        table
+        {
+            border-radius: 20px 0px 20px 0px;
+        }
+

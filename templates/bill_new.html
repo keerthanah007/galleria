@@ -1,0 +1,114 @@
+<head>
+
+	<script>
+		function displayDateTime() {
+			var today = new Date();
+			var date = today.toDateString();
+			var time = today.toLocaleTimeString();
+			document.getElementById("datetime").innerHTML = date + " " + time;
+		}
+	</script>
+</head>
+		<body onload="printDiv(); displayDateTime();">
+    <div id="div_print" >
+        <center>
+            <link href="/static/assets/css/fontawesome-all.css" rel="stylesheet">
+
+            <font style="font-family:times new roman">
+            <h1 style="color: #31a2b1;"><b>GALLERIA<b></h1>
+                <p>
+                    Attingal 74 ,
+                    East Fort,
+                    Trivandrum 682020 <br><br>
+                          <strong>Phone:</strong> +911234567890<br> 
+                          <strong>Email:</strong> galleria@mail.com<br> 
+                        </p> 
+            <h1 style="padding-top: 30px;font-size: 60px;">INVOICE</h1><br><br><br>
+            <!-- <h1>View Sales</h1> -->
+<table  class="  " style="color: black;background:white;opacity: 0.85;position: relative;right: 300px;">
+    {% for row in data['view']%}
+    <tr align="left">
+      <th>Bill No:</th>
+      <td><span id="bill-number"></span></td>
+    </tr><br>
+    <!-- <tr>
+      <th>Patient ID: </th>
+      <td>{{row['patient_id']}}</td>
+    </tr><br> -->
+    <center>
+    <tr align="left">
+        <th>NAME:</th>
+        <TD>{{row['u_fname']}}</TD><br>
+    </tr>
+    <tr align="left">
+        <th>PHONE NUMBER:</th>
+        <TD>{{row['u_phone']}}</TD>
+    </tr><br>
+    <tr align="left">
+        <th>EMAIL:</th>
+        <TD>{{row['username']}}</TD>
+    </tr><br>
+    <tr align="left">
+        <th>ADDRESS:</th>
+        <TD></b>{{row['u_hname']}}, {{row['u_street']}}, {{row['u_district']}}</TD>
+    </tr><br>
+    <tr align="left">
+      <th> BILL DATE AND TIME: </th>
+      <TD><span id="datetime"></span></TD>
+    </tr> 
+    </center>
+</div>
+</table>
+
+
+    {%endfor%}
+    <table border=1 class="table table-secondary table-striped " style="width: 1000px;color: black;background:white;opacity: 0.85;">
+
+
+      <script>
+        var billNumber = Math.floor(Math.random() * 1000000) + 1;
+        document.getElementById("bill-number").innerHTML = billNumber;
+      </script>
+
+
+<script> 
+    function printDiv() { 
+      var divContents = document.getElementById("div_print").innerHTML; 
+      var a = window.open('', '', 'height=500, width=500'); 
+      a.document.write(divContents); 
+      a.document.close(); 
+      a.print(); 
+    } 
+  </script>
+  <th>Index</th>
+  <th>Item name</th>
+  <th>Price</th>
+		
+                
+                
+            </tr>
+            
+        
+
+		{% for i in data['view']%}
+	<tr>
+		<td>{{loop.index}}</td>
+        <td>{{i['item_name']}}</td>
+		<td>{{i['finalcost']}}</td>
+            </tr>
+            {% endfor %}
+            <td align="right" colspan="9">Total: {{ data['view'][0]['c_tot_amount']}}</td>
+    </table></font></center></div>
+
+<script> 
+    function printDiv() { 
+      var divContents = document.getElementById("div_print").innerHTML; 
+      var a = window.open('', '', 'height=500, width=500'); 
+      a.document.write(divContents); 
+      a.document.close(); 
+      a.print(); 
+    } 
+  </script>
+
+  <p style="padding-left: 1000px;color: black;font-family:times new roman"><b>Authorised Signature</b></p>
+            <img style="padding-left: 1000px;" src="static/image/signature.png" height="100">

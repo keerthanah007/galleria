@@ -1,0 +1,87 @@
+{% include 'adminheader.html'%}
+{% if data['cus'] %}
+<center>
+	<div class="hope">
+		
+		<form action="" method="post">
+			<tr>
+				<td><input style="padding: 6px 5px;border-radius: 5px;margin-right: 10px;" type="text" name="search"></td>
+				<td><input class="btn btn-warning" type="submit" name="btn"></td>
+			</tr>
+		</form>
+	
+	<h1>Customer</h1>
+	<table class="table table-dark" style="width: 700px">
+		<tr>
+			<th>Slno.</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Gender</th>
+			<th>DOB</th>
+			<th>Phone</th>
+			<th>House</th>
+			<th>Street</th>
+			<th>District</th>
+			<th>Pin</th>
+			<!-- <th>Status</th> -->
+			<th>Type</th>
+			<th></th>
+
+		</tr>
+		{% for row in data['cus'] %}
+		<tr>
+			<td>{{loop.index}}</td>
+			<td>{{row['u_fname']}}</td>
+			<td>{{row['u_lname']}}</td>
+			<td>{{row['u_gender']}}</td>
+			<td>{{row['u_dob']}}</td>
+			<td>{{row['u_phone']}}</td>
+			<td>{{row['u_hname']}}</td>
+			<td>{{row['u_street']}}</td>
+			<td>{{row['u_district']}}</td>
+			<td>{{row['u_pin']}}</td>
+            <td>{{row['u_type']}}</td>
+			
+		</tr>
+		{%endfor%}
+	</table>
+	</div>
+	<a style="width: 150px" class="btn btn-info" href="print_cus"><b>Print Report</b></a>
+</center>
+
+{% endif %}
+
+
+<style type="text/css">
+    #form-reg{
+        background: url('/static/assets/images/banner-mid.jpg');
+        padding:1rem .4rem;
+        background-size: cover;
+    }
+
+    #reg{
+        background: rgba(0,0,0,.3);
+        width: 60%;
+        border-radius:6px;
+        color: #fff !important;
+
+    }
+    .form-control{
+        /*background: red !important;*/
+        width: 100%
+    }
+    .rd{
+        display: flex
+
+    }
+    .hope{
+        
+        background: rgba(0, 0, 0, .2);
+
+    }
+    table
+    {
+        border-radius: 20px 0px 20px 0px;
+    }
+    
+</style>

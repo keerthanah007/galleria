@@ -1,0 +1,143 @@
+{% include 'adminheader.html' %}
+
+{% if data['up'] %}
+
+<center>
+    <h3>Update Exhibition</h3>
+    <form method="post" id="form-reg">
+        <div id="reg">
+        <table class="table" style="width:500px">
+            <tr>
+                <th> Name</th>
+                <td><input type="text" class="form-control" required="" value="{{data['up'][0]['ex_name']}}" name="name"></td>
+            </tr>
+            
+            <tr>
+                <th>Venu</th>
+                <td><input type="text" class="form-control" required="" value="{{data['up'][0]['ex_venu']}}" name="venu"></td>
+            </tr>
+            
+            <tr>
+                <th>Date</th>
+                <td><input type="date" class="form-control" required="" name="date" ></td>
+            </tr>
+           
+            <tr>
+                <th>Entree Fee</th>
+                <td><input type="text" class="form-control" required="" value="{{data['up'][0]['ticket']}} " name="fee"></td>
+            </tr>
+            
+    
+            <td align="center"  colspan="2"><input class="btn btn-primary" type="submit" name="update" value="update" ></td>
+        </table>
+        </div>
+    </form>
+    </center> 
+
+
+    {% else %}
+
+<center>
+    <h3>Add Exhibition</h3>
+    <form method="post" id="form-reg">
+        <div id="reg">
+        <table class="table" style="width:500px">
+            <tr>
+                <th> Name</th>
+                <td><input type="text" class="form-control" required=""  name="name"></td>
+            </tr>
+            
+            <tr>
+                <th>Venue</th>
+                <td><input type="text" class="form-control" required=""  name="venu"></td>
+            </tr>
+            
+            <tr>
+                <th>Date</th>
+                <td><input type="date" class="form-control" required="" name="date" ></td>
+            </tr>
+           
+            <tr>
+                <th>Entry Fee</th>
+                <td><input type="text" class="form-control" required=""  name="fee"></td>
+            </tr>
+            
+    
+            <td align="center"  colspan="2"><input class="btn btn-primary" type="submit" name="submit" value="submit" ></td>
+        </table>
+        </div>
+    </form>
+    </center> 
+
+
+    {% endif %}
+    <center>
+        <div class="hope">
+            
+        
+        <h1>Exhibition</h1>
+        <table class="table table-dark" style="width: 700px">
+            <tr>
+                <th>Slno.</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Venue</th>
+                <th>Price</th>
+                <th></th>
+                <th></th>
+            </tr>
+           {% for row in data['views'] %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{row['ex_name']}}</td>
+                <td>{{row['ex_date']}}</td>
+                <td>{{row['ex_venu']}}</td>
+                <td>{{row['ticket']}}</td>
+                <td><a href="artexb?id={{row['ex_id']}}&edate={{row['ex_date']}}&evenu={{row['ex_venu']}}&ticket={{row['ticket']}}"class="btn btn-success">Art</a></td>
+                <td><a href="?action=update&id={{row['ex_id']}}" class="btn btn-success">Update</a></td>
+                
+            </tr>
+            {%endfor%}
+            </table>
+        </div>
+    </center>
+
+
+    {% with messages = get_flashed_messages() %}
+	{% if messages %}
+		{% for message in messages %}
+			<script>alert("{{ message }}")</script>
+		{% endfor %}
+	{% endif %}
+{% endwith %}
+
+    <style type="text/css">
+        #form-reg{
+            background: url('/static/assets/images/banner-mid.jpg');
+            padding:1rem .4rem;
+            background-size: cover;
+        }
+    
+        #reg{
+            background: rgba(0,0,0,.3);
+            width: 60%;
+            border-radius:6px;
+            color: #fff !important;
+    
+        }
+        .form-control{
+            /*background: red !important;*/
+            width: 100%
+        }
+        .hope{
+            
+            background: rgba(0, 0, 0, .2);
+    
+        }
+        table
+        {
+            border-radius: 20px 0px 20px 0px;
+        }
+    
+       
+        

@@ -1,0 +1,200 @@
+{% include 'public_header.html'%}
+
+			
+<center>
+<h3>Register</h3>
+<form method="post" id="form-reg">
+	<div id="reg">
+	<table class="table" style="width:500px">
+		<tr>
+			<th>First Name</th>
+			<td><input type="text" class="form-control" required=""  name="fname"></td>
+		</tr>
+		<tr>
+			<th>Last Name</th>
+			<td><input type="text" class="form-control" required=""  name="lname"></td>
+		</tr>
+		<tr>
+			<th >Gender</th>
+			<td class="rd"><input type="radio" class="form-control" required=""  name="gender" value="male">Male
+				<input type="radio" class="form-control" required=""  name="gender" value="female">female</td>
+
+
+		</tr>
+		<tr>
+			<th>Phone</th>
+			<td><input type="text" class="form-control" required="" maxlength="10" name="num"></td>
+		</tr>
+		<tr>
+			<th>House Name</th>
+			<td><textarea name="add" class="form-control" required="" class="form-control"></textarea></td>
+		</tr>
+		
+		<tr>
+			<th>Street</th>
+			<td><input type="text" class="form-control" required="" name="street"></td>
+		</tr>
+			<tr>
+			<th>District</th>
+			<td><select name="district" class="form-control">
+					    		<option value="Kasargod">Kasargod
+                	</option>
+                	<option value="Kannur">Kannur
+                	</option>
+                	<option value="Wayanad">Wayanad
+                	</option>
+                	<option value="Kozhikode">Kozhikode
+                	</option>
+                	<option value="Malappuram">Malappuram</option>
+                	<option value="Palakkad">Palakkad
+                	</option>
+                	<option value="Thrissur">Thrissur
+                	</option>
+                	<option value="Ernakulam">Ernakulam
+                	</option>
+                	<option value="Idukki">Idukki
+                	</option>
+                	<option value="Kottayam">Kottayam
+                	</option>
+                	<option value="Alappuzha">Alappuzha</option>
+                	<option value="Pathanamthitta">Pathanamthitta</option>
+                	<option value="Kollam">Kollam
+                	</option>
+                	<option value="Thiruvananthapuram">Thiruvananthapuram</option>
+					        </select></td>
+		</tr>
+		
+		
+		<tr>
+			<th>Pincode</th>
+			<td><input type="text" class="form-control" required="" maxlength="6"  name="pin"></td>
+		</tr>
+		
+		<tr>
+			<th>Date of Birth</th>
+			<td><input type="date" max="2000-12-31" class="form-control" required="" name="date" ></td>
+		</tr>
+
+		
+		<tr>
+			<th>User Name</th>
+			<td><input type="email" class="form-control" required=""   name="uname"></td>
+		</tr>
+		<tr id="eerror">
+			<th></th>
+			<th style="color: red;">InValid Email</th>
+		</tr>
+		<tr>
+			<th>Password</th>
+			<td><input type="password" class="form-control" required=""  name="pwd"></td>
+		</tr>
+
+		<td align="center"  colspan="2"><input class="btn btn-primary" type="submit" name="register" id="btn" value="submit" ></td>
+	</table>
+	</div>
+</form>
+</center>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(function() {
+        $("input[name='fname']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+
+        });
+        $("input[name='lname']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+
+        });
+        // $("input[name='dob']").on('input', function(e) {
+        //     $(this).val($(this).val().replace(/[^0-9/]/g, ''));
+
+        // });
+        
+        $("input[name='num']").on('input', function(e) {
+        	$(this).val($(this).val().replace(/[^0-9]/g, ''));
+            
+        });
+        $("input[name='pin']").on('input', function(e) {
+        	$(this).val($(this).val().replace(/[^0-9]/g, ''));
+            
+        });
+        $("input[name='uname']").on('input', function(e) {
+              var re = /([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{1,}/.test(this.value);
+           
+                if(!re) {
+                    $('#eerror').show();
+                    $('#btn').prop('disabled', true);
+                    console.log("err");
+                } else {
+                    $('#btn').prop('disabled', false);
+                    $('#eerror').hide();
+                    console.log("err");
+                }
+
+        });
+        $("input[name='address']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z0-9()/. ]/g, ''));
+
+        });
+        $("input[name='place']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+
+        });
+            
+        $("input[name='passw']").on('input', function(e) {
+        	// $(this).val($(this).val().replace(/[^0-9A-Za-z@/. ]/g, ''));
+            var val = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(this.value);
+                if(!val) {
+                    $('#eerror2').show();
+                    $('#btn').prop('disabled', true);
+                    console.log("err");
+                } else {
+                    $('#btn').prop('disabled', false);
+                    $('#eerror2').hide();
+                    console.log("err");
+                }
+            
+        });
+    });
+
+
+</script>
+
+	<center>
+
+	<style type="text/css">
+		#form-reg{
+			background: url('/static/assets/images/banner-mid.jpg');
+			padding:1rem .4rem;
+			background-size: cover;
+		}
+
+		#reg{
+			background: rgba(0,0,0,.3);
+			width: 60%;
+			border-radius:6px;
+			color: #fff !important;
+
+		}
+		.form-control{
+			/*background: red !important;*/
+			width: 100%
+		}
+		.rd{
+			display: flex
+
+		}
+	</style>
+
+</body>
+</html>
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+		{% for message in messages %}
+			<script>alert("{{ message }}")</script>
+		{% endfor %}
+	{% endif %}
+{% endwith %}

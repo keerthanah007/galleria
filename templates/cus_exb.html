@@ -1,0 +1,61 @@
+{% include 'userheader.html'%}
+
+<center>
+    <div class="hope">
+        
+    
+    <h1>Upcoming Exhibitions</h1>
+    <table class="table table-dark" style="width: 700px">
+        <tr>
+            <th>Slno.</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Venue</th>
+            <th>Price</th>
+            <th></th>
+            
+        </tr>
+       {% for row in data['cus_exb'] %}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>{{row['ex_name']}}</td>
+            <td>{{row['ex_date']}}</td>
+            <td>{{row['ex_venu']}}</td>
+            <td>{{row['ticket']}}</td>
+            <td><a href="cus_exb_art?id={{row['ex_id']}}&edate={{row['ex_date']}}&evenu={{row['ex_venu']}}&ticket={{row['ticket']}}"class="btn btn-success">View Art</a></td>
+            
+            
+        </tr>
+        {%endfor%}
+        </table>
+    </div>
+</center>
+
+
+<style type="text/css">
+    #form-reg{
+        background: url('/static/assets/images/banner-mid.jpg');
+        padding:1rem .4rem;
+        background-size: cover;
+    }
+
+    #reg{
+        background: rgba(0,0,0,.3);
+        width: 60%;
+        border-radius:6px;
+        color: #fff !important;
+
+    }
+    .form-control{
+        /*background: red !important;*/
+        width: 100%
+    }
+    .hope{
+        
+        background: rgba(0, 0, 0, .2);
+
+    }
+    table
+    {
+        border-radius: 20px 0px 20px 0px;
+    }

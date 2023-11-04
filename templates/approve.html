@@ -1,0 +1,92 @@
+{% include 'adminheader.html'%}
+
+<center>
+    <div class="hope">
+
+        <h1>Approve Art</h1>
+        <table class="table table-dark" style="width: 1200px">
+            <tr>
+                <th>Slno.</th>
+                <th>Sub-category</th>
+                <th>Artist Name</th>
+                <th>Art Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th></th>
+                <th></th>
+            </tr>
+            {% for row in data['art'] %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{row['sub_name']}}</td>
+                <td>{{row['u_fname']}}</td>
+                <td>{{row['item_name']}}</td>
+                <td>{{row['item_des']}}</td>
+                <td>{{row['item_price']}}</td>
+                <td> <img width="100" height="100" src="{{row['item_image']}}" alt=""></td>
+
+
+                {% if row['item_approval']=='pending' %}
+                    <form method="GET" action="/approveform">
+                        <input type="hidden" name="item_id" value="{{row['item_id']}}">
+                        <td>Profit Percentage:<br /> <input name="profitperc" value="20"></td>
+                        <td><input type="submit" class="btn btn-success" value="Approve"></input></td>
+                    </form>
+                {% elif row['item_approval']=='rejected' %}
+                    <form method="GET" action="/approveform">
+                        <input type="hidden" name="item_id" value="{{row['item_id']}}">
+                        <td>Profit Percentage:<br /> <input name="profitperc" value="20"></td>
+                        <td><input type="submit" class="btn btn-success" value="Approve"></input></td>
+                    </form>
+                {% endif %}
+
+                {% if row['item_approval']=='pending' %}
+                    <td><a href="?action=rejected&id={{row['item_id']}}" class="btn btn-danger">Reject</a></td>
+                {% elif row['item_approval']=='approved' %}
+                    <td><a href="?action=rejected&id={{row['item_id']}}" class="btn btn-danger">Reject</a></td>
+                {% endif %}
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+</center>
+
+<style type="text/css">
+    #form-reg {
+        background: url('/static/assets/images/banner-mid.jpg');
+        padding: 1rem .4rem;
+        background-size: cover;
+    }
+
+    #reg {
+        background: rgba(0, 0, 0, .3);
+        width: 60%;
+        border-radius: 6px;
+        color: #fff !important;
+
+    }
+
+    .form-control {
+        /*background: red !important;*/
+        width: 100%
+    }
+
+    .hope {
+
+        background: rgba(0, 0, 0, .2);
+
+    }
+
+    table {
+        border-radius: 20px 0px 20px 0px;
+    }
+</style>
+
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+		{% for message in messages %}
+			<script>alert("{{ message }}")</script>
+		{% endfor %}
+	{% endif %}
+{% endwith %}

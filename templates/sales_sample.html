@@ -1,0 +1,37 @@
+<style>
+    @media print{
+        body,body *{
+            visibility: hidden ;
+        }
+
+        #printsec,#printsec *{
+            visibility: visible !important;
+        }
+    }
+</style>
+
+
+<center>
+    <h1> Sales</h1>
+
+    <table id="printsec" class="table" style="width: 1200px;box-shadow: 2px 4px 6px lightgrey,-1px -2px 6px rgb(235, 235, 235);margin-top: 100px;">
+        <tr>
+           
+            <th>Sl.no</th>
+                <th>Item</th>
+                <th>Item Name</th>
+                 <th>Earning</th>
+              
+            </tr>
+            {% for row in data['artist'] %}
+            <tr id="products" style="border-bottom: 1px solid lightgrey;">
+                <td>{{ loop.index }}</td>
+                <td><img src="/{{ row['item_image'] }}" width="100" height="100" alt=""></td>
+                <td>{{ row['item_name'] }}</td>
+                <td>{{ row['item_price'] }}</td>
+            </tr>
+            {% endfor %}
+        </tr>
+    </table>
+    <a style="width: 150px" class="btn btn-info" onclick="print()"><b>Print Report</b></a>
+</center>

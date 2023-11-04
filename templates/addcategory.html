@@ -1,0 +1,124 @@
+{% include 'adminheader.html'%}
+
+
+{% if data['up'] %}
+<center>
+<h3>Update Category</h3>
+<form method="post" id="form-reg">
+	<div id="reg">
+	<table class="table" style="width:500px">
+		<tr>
+			<th>Category Name</th>
+			<td><input type="text" value="{{ data['up'][0]['cat_name'] }}" class="form-control" required=""  name="cat_name"></td>
+		</tr>
+	
+	
+		<td align="center"  colspan="2"><input class="btn btn-primary" type="submit" name="update" value="update" ></td>
+	</table>
+	</div>
+</form>
+</center>
+{%else%}
+
+
+
+
+
+
+
+
+
+
+			
+<center>
+<h3>Add Category</h3>
+<form method="post" id="form-reg">
+	<div id="reg">
+	<table class="table" style="width:500px">
+		<tr>
+			<th>Category Name</th>
+			<td><input type="text" class="form-control" required=""  name="cat_name"></td>
+		</tr>
+	
+		<td align="center"  colspan="2"><input class="btn btn-primary" type="submit" name="submit" value="submit" ></td>
+	</table>
+	</div>
+</form>
+</center>
+	
+
+{% endif %}
+
+<center>
+	<div class="hope">
+		
+	
+	<h1>View Category</h1>
+	<table class="table table-dark" style="width: 700px">
+		<tr>
+			<th>Slno.</th>
+			<th>Category Name</th>
+			<th>Status</th>
+			<th></th>
+			<th></th>
+		</tr>
+       {% for row in data['cat'] %}
+		<tr>
+			<td>{{loop.index}}</td>
+			<td>{{row['cat_name']}}</td>
+			{% if row['cat_status']==1 %}
+			<td>Active</td>
+			<td><a href="?action=inactive&id={{row['cat_id']}}" class="btn btn-success">inActive</a></td>
+			{%elif row['cat_status']==0 %}
+			<td>Inactive</td>
+			<td><a href="?action=active&id={{row['cat_id']}}" class="btn btn-danger">Active</a></td>
+			{% else %}
+			<td>{{row['cat_status']}}</td>
+			{% endif %}
+			<td><a href="?action=update&id={{row['cat_id']}}" class="btn btn-success">Update</a></td>
+		</tr>
+    	{%endfor%}
+		</table>
+	</div>
+</center>
+
+	<style type="text/css">
+		#form-reg{
+			background: url('/static/assets/images/banner-mid.jpg');
+			padding:1rem .4rem;
+			background-size: cover;
+		}
+
+		#reg{
+			background: rgba(0,0,0,.3);
+			width: 60%;
+			border-radius:6px;
+			color: #fff !important;
+
+		}
+		.form-control{
+			/*background: red !important;*/
+			width: 100%
+		}
+		.hope{
+			
+			background: rgba(0, 0, 0, .2);
+
+		}
+		table
+		{
+			border-radius: 20px 0px 20px 0px;
+		}
+		
+	</style>
+	</style>
+
+</body>
+</html>
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+		{% for message in messages %}
+			<script>alert("{{ message }}")</script>
+		{% endfor %}
+	{% endif %}
+{% endwith %}

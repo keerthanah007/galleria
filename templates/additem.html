@@ -1,0 +1,172 @@
+{% include 'userheader.html'%}
+
+{% if data['up'] %}
+
+<center>
+    <h3>Update Art</h3>
+    <form method="post" id="form-reg" enctype="multipart/form-data">
+        <div id="reg">
+        <table class="table" style="width:500px">
+            <tr>
+                <th>Sub-category</th>
+                <td><select name="sub" class="form-control" >
+
+                    <option>--select---</option>
+                    {% for i in data['subdrop']%}
+                    <option value="{{i['sub_id']}}">{{i['sub_name']}}</option>
+                    {% endfor%}
+                </select></td>
+            </tr>
+            <tr>
+                <th>Art name</th>
+                <td><input type="text" name="aname" class="form-control" required="" class="form-control" value="{{data['up'][0]['item_name']}}""></td>
+            </tr>
+           
+    
+            <tr>
+                <th>Description</th>
+                <td><textarea name="des" class="form-control" required="" value="{{data['up'][0]['item_des']}}"class="form-control"></textarea></td>
+            </tr>
+            
+            <tr>
+                <th>Price</th>
+                <td><input type="text" class="form-control" required="" " value="{{data['up'][0]['item_price']}}" name="price"></td>
+            </tr>
+
+            <tr>
+                <th>Image</th>
+                <td><input type="file" class="form-control" required=""  name="img"></td>
+            </tr>
+            
+            <td align="center"  colspan="2"><input class="btn btn-primary" type="submit" name="update" value="update" ></td>
+        </table>
+        </div>
+    </form>
+    </center>
+
+    {% else %}
+
+
+<center>
+    <h3>Submit Art</h3>
+    <form method="post" id="form-reg" enctype="multipart/form-data">
+        <div id="reg">
+        <table class="table" style="width:500px">
+            <tr>
+                <th>Sub-category</th>
+                <td><select name="sub" class="form-control" >
+
+                    <option>--select---</option>
+                    {% for i in data['subdrop']%}
+                    <option value="{{i['sub_id']}}">{{i['sub_name']}}</option>
+                    {% endfor%}
+                </select></td>
+            </tr>
+            <tr>
+                <th>Art name</th>
+                <td><input type="text" name="aname" class="form-control" required="" class="form-control"></td>
+            </tr>
+           
+           
+            <tr>
+                <th>Description</th>
+                <td><textarea name="des" class="form-control" required="" class="form-control"></textarea></td>
+            </tr>
+            
+            <tr>
+                <th>Price</th>
+                <td><input type="text" class="form-control" required="" " name="price"></td>
+            </tr>
+
+            <tr>
+                <th>Image</th>
+                <td><input type="file" class="form-control" required=""  name="img"></td>
+            </tr>
+            
+            <td align="center"  colspan="2"><input class="btn btn-primary" type="submit" name="submit" value="submit" ></td>
+        </table>
+        </div>
+    </form>
+    </center>
+
+    {% endif %}
+    <center>
+        <div class="hope">
+            
+        
+        <h1>View Art</h1>
+        <table class="table table-dark" style="width: 700px">
+            <tr>
+                <th>Slno.</th>
+                <th>Sub-category</th>
+                <th>Art Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th></th>
+            </tr>
+           {% for row in data['views'] %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{row['sub_name']}}</td>
+                <td>{{row['item_name']}}</td>
+                <td>{{row['item_des']}}</td>
+                <td>{{row['item_price']}}</td>
+                <td> <img src="{{row['item_image']}}" alt=""></td>
+                {% if row['item_approval']=="pending"%}
+                <td><a href="?action=update&id={{row['item_id']}}" class="btn btn-success">Update</a></td>
+                {%else%}
+                  {% if row['item_approval']=="paid"%}
+                <td>Sold</td>
+                   {%endif%}
+                   {% if row['item_approval']!="paid"%}
+                 <td>{{row['item_approval']}}</td>
+                   {% endif %}
+                {%endif%}
+            </tr>
+            {%endfor%}
+            </table>
+        </div>
+    </center>
+
+
+    
+    <style type="text/css">
+		#form-reg{
+			background: url('/static/assets/images/banner-mid.jpg');
+			padding:1rem .4rem;
+			background-size: cover;
+		}
+
+		#reg{
+			background: rgba(0,0,0,.3);
+			width: 60%;
+			border-radius:6px;
+			color: #fff !important;
+
+		}
+		.form-control{
+			/*background: red !important;*/
+			width: 100%
+		}
+		.rd{
+			display: flex
+
+		}
+        .hope{
+			
+			background: rgba(0, 0, 0, .2);
+
+		}
+		table
+		{
+			border-radius: 20px 0px 20px 0px;
+		}
+	</style>
+    {% with messages = get_flashed_messages() %}
+	{% if messages %}
+		{% for message in messages %}
+			<script>alert("{{ message }}")</script>
+		{% endfor %}
+	{% endif %}
+{% endwith %}

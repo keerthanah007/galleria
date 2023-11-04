@@ -1,0 +1,83 @@
+<body onload="printDiv()">
+    <div id="div_print" >
+        <center>
+            <link rel="stylesheet" href="static/assets/css/style-starter.css">
+            <font style="font-family:times new roman">
+                <br><br>
+            <h1 style="color: #3ccadd;"><b>GALLERIA<b></h1>
+                <p>
+                    0926k 4th block, 
+                    Attingal, 
+                    Trivandrum ,
+                              <br><br>
+                          <strong>Phone:</strong> +91 9074772635<br> 
+                          <strong>Email:</strong> galleria@mail.com<br> 
+                        </p> 
+            <h1 style="padding-top: 30px;font-size: 60px;">CUSTOMER REPORT</h1><br>`
+            <!-- <h1>View Sales</h1> -->
+            <tr style="position: absolute;left: 0px;">
+                <th> </th>
+                <TD></TD>
+              </tr> 
+              <span style="position: absolute;left: 60px;"> REPORT DATE AND TIME: <span id="datetime"></span></span>
+              <table border=1 class="table table-secondary table-striped " style="width: 1000px;color: black;background:white;opacity: 0.85;">
+    <tr>
+        <th>Slno.</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Gender</th>
+        <th>DOB</th>
+        <th>Phone</th>
+        <th>House</th>
+        <th>Street</th>
+        <th>District</th>
+        <th>Pin</th>
+        <!-- <th>Status</th> -->
+        <th>Type</th>
+        <th></th>
+
+    </tr>
+            
+  
+            {% for row in data['cus']%}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{row['u_fname']}}</td>
+                <td>{{row['u_lname']}}</td>
+                <td>{{row['u_gender']}}</td>
+                <td>{{row['u_dob']}}</td>
+                <td>{{row['u_phone']}}</td>
+                <td>{{row['u_hname']}}</td>
+                <td>{{row['u_street']}}</td>
+                <td>{{row['u_district']}}</td>
+                <td>{{row['u_pin']}}</td>
+                <td>{{row['u_type']}}</td>
+                
+            </tr>
+            {% endfor %}
+
+
+<script> 
+    function printDiv() { 
+      var divContents = document.getElementById("div_print").innerHTML; 
+      var a = window.open('', '', 'height=500, width=500'); 
+      a.document.write(divContents); 
+      a.document.close(); 
+      a.print(); 
+
+      var today = new Date();
+      var date = today.toDateString();
+      var time = today.toLocaleTimeString();
+      document.getElementById("datetime").innerHTML = date + " " + time;
+
+
+    } 
+  </script>
+<script>
+    function displayDateTime() {
+        var today = new Date();
+        var date = today.toDateString();
+        var time = today.toLocaleTimeString();
+        document.getElementById("datetime").innerHTML = date + " " + time;
+    }
+</script>

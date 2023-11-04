@@ -1,0 +1,41 @@
+{% include 'couhead.html' %}
+
+
+<br>
+<center>
+    <h2>My Assigned Orders</h2>
+    <br>
+    <table class="table">
+        <tr>
+            <th>index</th>
+            <th>Art</th>
+            <th>Customer</th>
+            <th>House</th>
+            <th>Street</th>
+            <th>District</th>
+            <th>Phone</th>
+            <th>Email</th>
+        </tr>
+        {% for row in data['res'] %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td><img src="/{{ row['item_image'] }}" width="50" height="50" alt=""></td>
+            <td>{{ row['u_fname'] }}{{ row['u_lname'] }}</td>
+            <td>{{ row['u_hname'] }}</td>
+            <td>{{ row['u_street'] }}</td>
+            <td>{{ row['u_district'] }}</td>
+            <td>{{ row['u_phone'] }}</td>
+            <td>{{ row['username'] }}</td>
+            <td><a class="btn btn-success" href="?action=falooda&cm_id={{ row['cm_id'] }}">Deliverd</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+</center>
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+		{% for message in messages %}
+			<script>alert("{{ message }}")</script>
+		{% endfor %}
+	{% endif %}
+{% endwith %}

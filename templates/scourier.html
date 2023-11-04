@@ -1,0 +1,268 @@
+{% include 'staffheader.html' %}
+
+{% if data['up'] %}			
+<center>
+<h3>Update Courier</h3>
+<form method="post" id="form-reg">
+	<div id="reg">
+	<table class="table" style="width:500px">
+		<tr>
+			<th> Name</th>
+			<td><input type="text" class="form-control" required=""  name="name" value="{{data['up'][0]['cou_name']}}"></td>
+		</tr>
+		
+		<tr>
+			<th>Phone</th>
+			<td><input type="text" class="form-control" required="" maxlength="10" name="num" value="{{data['up'][0]['cou_phone']}}"></td>
+		</tr>
+	
+		
+			<tr>
+			<th>District</th>
+			<td><select name="district" class="form-control">
+					    		<option value="Kasargod">Kasargod
+                	</option>
+                	<option value="Kannur">Kannur
+                	</option>
+                	<option value="Wayanad">Wayanad
+                	</option>
+                	<option value="Kozhikode">Kozhikode
+                	</option>
+                	<option value="Malappuram">Malappuram</option>
+                	<option value="Palakkad">Palakkad
+                	</option>
+                	<option value="Thrissur">Thrissur
+                	</option>
+                	<option value="Ernakulam">Ernakulam
+                	</option>
+                	<option value="Idukki">Idukki
+                	</option>
+                	<option value="Kottayam">Kottayam
+                	</option>
+                	<option value="Alappuzha">Alappuzha</option>
+                	<option value="Pathanamthitta">Pathanamthitta</option>
+                	<option value="Kollam">Kollam
+                	</option>
+                	<option value="Thiruvananthapuram">Thiruvananthapuram</option>
+					        </select></td>
+		</tr>
+		
+	
+		<td align="center"  colspan="2"><input class="btn btn-primary" type="submit" name="update" value="update" ></td>
+	</table>
+	</div>
+</form>
+</center> 
+
+
+{% else %}
+
+<center>
+<h3>Add Courier</h3>
+<form method="post" id="form-reg">
+	<div id="reg">
+	<table class="table" style="width:500px">
+		<tr>
+			<th> Name</th>
+			<td><input type="text" class="form-control" required=""  name="name"></td>
+		</tr>
+		
+		<tr>
+			<th>Phone</th>
+			<td><input type="text" class="form-control" required="" maxlength="10" name="num"></td>
+		</tr>
+		
+			<tr>
+			<th>District</th>
+			<td><select name="district" class="form-control">
+					    		<option value="Kasargod">Kasargod
+                	</option>
+                	<option value="Kannur">Kannur
+                	</option>
+                	<option value="Wayanad">Wayanad
+                	</option>
+                	<option value="Kozhikode">Kozhikode
+                	</option>
+                	<option value="Malappuram">Malappuram</option>
+                	<option value="Palakkad">Palakkad
+                	</option>
+                	<option value="Thrissur">Thrissur
+                	</option>
+                	<option value="Ernakulam">Ernakulam
+                	</option>
+                	<option value="Idukki">Idukki
+                	</option>
+                	<option value="Kottayam">Kottayam
+                	</option>
+                	<option value="Alappuzha">Alappuzha</option>
+                	<option value="Pathanamthitta">Pathanamthitta</option>
+                	<option value="Kollam">Kollam
+                	</option>
+                	<option value="Thiruvananthapuram">Thiruvananthapuram</option>
+					        </select></td>
+		</tr>
+		
+		
+		
+		<tr>
+		<th>User Name</th>
+			<td><input type="email" class="form-control" required=""   name="uname"></td>
+		</tr>
+		<tr>
+			<th>Password</th>
+			<td><input type="password" class="form-control" required=""  name="pwd"></td>
+		</tr>
+
+		<td align="center"  colspan="2"><input class="btn btn-primary" type="submit" name="submit" id="btn" value="submit" ></td>
+	</table>
+	</div>
+</form>
+</center> 
+{% endif %}
+
+
+
+<center>
+	<div class="hope">
+		
+	
+	<h1>View Couriers</h1>
+	<table class="table table-dark" style="width: 700px">
+		<tr>
+			<th>Slno.</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Gender</th>
+			<th>DOB</th>
+			<th>Phone</th>
+			<th>House Name</th>
+			<!-- <th>Street</th>
+			<th>Pin</th>
+			<th>Status</th> -->
+			<th></th>
+			<th></th>
+
+		</tr>
+		{% for row in data['courier'] %}
+		<tr>
+			<td>{{loop.index}}</td>
+			<td>{{row['cou_name']}}</td>
+			<td>{{row['cou_phone']}}</td>
+			<td>{{row['cou_place']}}</td>
+			{% if row['cou_status']==1 %}
+			<td>Active</td>
+			<td><a href="?action=inactive&id={{row['cou_id']}}&uid={{row['username']}}" class="btn btn-success">inActive</a></td>
+			{%elif row['cou_status']==0 %}
+			<td>Inactive</td>
+			<td><a href="?action=active&id={{row['cou_id']}}&uid={{row['username']}}" class="btn btn-danger">Active</a></td>
+			{% else %}
+			<td>{{row['cou_status']}}</td>
+			{% endif %}
+			<td><a href="?action=update&id={{row['cou_id']}}&uid={{row['username']}}" class="btn btn-success">Update</a></td>
+		</tr>
+		{%endfor%}
+	</table>
+	</div>
+</center>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(function() {
+        $("input[name='fname']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+
+        });
+        $("input[name='lname']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+
+        });
+        // $("input[name='dob']").on('input', function(e) {
+        //     $(this).val($(this).val().replace(/[^0-9/]/g, ''));
+
+        // });
+        
+        $("input[name='num']").on('input', function(e) {
+        	$(this).val($(this).val().replace(/[^0-9]/g, ''));
+            
+        });
+        $("input[name='pin']").on('input', function(e) {
+        	$(this).val($(this).val().replace(/[^0-9]/g, ''));
+            
+        });
+        $("input[name='uname']").on('input', function(e) {
+              var re = /([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{1,}/.test(this.value);
+           
+                if(!re) {
+                    $('#eerror').show();
+                    $('#btn').prop('disabled', true);
+                    console.log("err");
+                } else {
+                    $('#btn').prop('disabled', false);
+                    $('#eerror').hide();
+                    console.log("err");
+                }
+
+        });
+        $("input[name='address']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z0-9()/. ]/g, ''));
+
+        });
+        $("input[name='place']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+
+        });
+            
+        $("input[name='passw']").on('input', function(e) {
+        	// $(this).val($(this).val().replace(/[^0-9A-Za-z@/. ]/g, ''));
+            var val = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(this.value);
+                if(!val) {
+                    $('#eerror2').show();
+                    $('#btn').prop('disabled', true);
+                    console.log("err");
+                } else {
+                    $('#btn').prop('disabled', false);
+                    $('#eerror2').hide();
+                    console.log("err");
+                }
+            
+        });
+    });
+
+
+</script>
+
+
+	<center>
+
+	<style type="text/css">
+		#form-reg{
+			background: url('/static/assets/images/banner-mid.jpg');
+			padding:1rem .4rem;
+			background-size: cover;
+		}
+
+		#reg{
+			background: rgba(0,0,0,.3);
+			width: 60%;
+			border-radius:6px;
+			color: #fff !important;
+
+		}
+		.form-control{
+			/*background: red !important;*/
+			width: 100%
+		}
+		.hope{
+			
+			background: rgba(0, 0, 0, .2);
+
+		}
+		table
+		{
+			border-radius: 20px 0px 20px 0px;
+		}
+		
+	</style>
+
+</body>
+</html>

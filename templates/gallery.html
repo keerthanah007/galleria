@@ -1,0 +1,183 @@
+{% include 'userheader.html' %}
+<!--
+	Author: W3layouts
+	Author URL: http://w3layouts.com
+	License: Creative Commons Attribution 3.0 Unported
+	License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+	<title>Goggles Ecommerce Category Bootstrap responsive Web Template | Customer :: w3layouts</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<meta name="keywords" content="Goggles a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<link href="/static/assets/css/bootstrap.css" rel='stylesheet' type='text/css' />
+	<link href="/static/assets/css/login_overlay.css" rel='stylesheet' type='text/css' />
+	<link href="/static/assets/css/style6.css" rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="/static/assets/css/shop.css" type="text/css" />
+	<link href="/static/assets/css/style.css" rel='stylesheet' type='text/css' />
+	<link href="/static/assets/css/fontawesome-all.css" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
+	    rel="stylesheet">
+</head>
+
+<body >
+	<div class="banner-top container-fluid" id="home">
+	
+	<!--/404-->
+	<section class="banner-bottom-wthreelayouts py-lg-5 py-3">
+		<div class="container-fluid">
+ <form action="" method="post">
+			<tr>
+				<td><input style="padding: 6px 5px;border-radius: 5px;margin-right: 10px;" type="text" name="search"></td>
+				<td><input class="btn btn-warning" type="submit" name="btn"></td>
+			</tr>
+		</form>
+           </div>
+			<div class="inner-sec-shop px-lg-4 px-3" style="background: rgb(67, 63, 63);border-radius: 10px">
+				<h3 class="tittle-w3layouts text-center my-lg-4 my-3 text-white">ART IN GALLARIA</h3>
+				<div class="row" >
+                    <a href="google.com">
+
+						{% for row in data['item']%}
+					<div class="col-lg-3  customer-main" style="margin-top: 20px;">
+						<div class="card">
+							<div class="card-body">
+								<div class="customer-img">
+									<img style="width: 100px;height: 100px;" src="/{{ row['item_image'] }}" alt=" " class="img-fluid rounded">
+								</div>
+								<div class="customer-info text-left py-lg-4 py-2">
+									<h4>{{ row['item_name']}}</h4>
+									<h6>{{ row['u_fname']}}</h6>
+									<p>Rs.{{ row['finalcost'] }}</p>
+									<div class="row  pt-3 mt-3 team-social border-top">
+											<ul class="col-md-8 d-flex justify-content-right social-icons">
+
+
+											<li>
+												<a href="single?item_id={{ row['item_id'] }}">
+													<i class="fa fa-cart-plus"></i>
+												</a>
+											</li>
+							
+
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+               
+					{% endfor%}
+					
+					
+    
+	</section>
+	<!--//404-->
+	
+
+	<!--jQuery-->
+	<script src="/static/assets/js/jquery-2.2.3.min.js"></script>
+	<!-- newsletter modal -->
+	<!--search jQuery-->
+	<script src="/static/assets/js/modernizr-2.6.2.min.js"></script>
+	<script src="/static/assets/js/classie-search.js"></script>
+	<script src="/static/assets/js/demo1-search.js"></script>
+	<!--//search jQuery-->
+	<!-- cart-js -->
+	<script src="/static/assets/js/minicart.js"></script>
+	<script>
+		googles.render();
+
+		googles.cart.on('googles_checkout', function (evt) {
+			var items, len, i;
+
+			if (this.subtotal() > 0) {
+				items = this.items();
+
+				for (i = 0, len = items.length; i < len; i++) {}
+			}
+		});
+	</script>
+	<!-- //cart-js -->
+	<script>
+		$(document).ready(function () {
+			$(".button-log a").click(function () {
+				$(".overlay-login").fadeToggle(200);
+				$(this).toggleClass('btn-open').toggleClass('btn-close');
+			});
+		});
+		$('.overlay-close1').on('click', function () {
+			$(".overlay-login").fadeToggle(200);
+			$(".button-log a").toggleClass('btn-open').toggleClass('btn-close');
+			open = false;
+		});
+	</script>
+	<!-- carousel -->
+	<!-- dropdown nav -->
+	<script>
+		$(document).ready(function () {
+			$(".dropdown").hover(
+				function () {
+					$('.dropdown-menu', this).stop(true, true).slideDown("fast");
+					$(this).toggleClass('open');
+				},
+				function () {
+					$('.dropdown-menu', this).stop(true, true).slideUp("fast");
+					$(this).toggleClass('open');
+				}
+			);
+		});
+	</script>
+	<!-- //dropdown nav -->
+	<script src="/static/assets/js/move-top.js"></script>
+    <script src="/static/assets/js/easing.js"></script>
+    <script>
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event) {
+                event.preventDefault();
+                $('html,body').animate({
+                    scrollTop: $(this.hash).offset().top
+                }, 900);
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            /*
+            						var defaults = {
+            							  containerID: 'toTop', // fading element id
+            							containerHoverID: 'toTopHover', // fading element hover id
+            							scrollSpeed: 1200,
+            							easingType: 'linear' 
+            						 };
+            						*/
+
+            $().UItoTop({
+                easingType: 'easeOutQuart'
+            });
+
+        });
+    </script>
+    <!--// end-smoth-scrolling -->
+
+
+	<script src="/static/assets/js/bootstrap.js"></script>
+	<!-- js file -->
+</body>
+
+</html>

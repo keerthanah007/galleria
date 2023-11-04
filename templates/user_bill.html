@@ -1,0 +1,93 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bill</title>
+</head>
+<style>
+	@media print{
+		#print{
+			visibility: hidden !important;
+		}
+	}
+</style>
+<body onload="printDiv(),displayDateTime();">
+    <link href="/static/cust/css/style.css" rel='stylesheet' type='text/css' />
+	
+<!-- <button><a href="/cust_order">Back</a></button> -->
+<div align="center" style="margin-left: 490px!important ;"><button class="btn btn-success" id="print" onclick="display()">Print</button></div>
+<center>
+<div id="printdiv" style="background:linear-gradient(rgb(215, 153, 218),rgb(219, 143, 199)) !important ;width: 1000px!important ;border-radius: 5px!important ;box-shadow: 0px 2px 20px lightgray!important ;margin: 10px auto!important ;">
+	<div align="center">
+	<h1 style="text-transform: uppercase!important ;font-weight: 800!important ;font-size: 70px!important ;text-shadow: 1px 2px 3px rgb(241, 96, 210)!important ; text-align:left !important">Galleria</h1>
+	<p style="text-align: left !important;">
+		Attingal 74 ,
+		East Fort,
+		Trivandrum 682020 <br><br>
+			  <strong>Phone:</strong> +911234567890<br> 
+			  <strong>Email:</strong> galleria@mail.com<br> 
+			</p> 
+
+	<hr>
+	<h2>BILL </h2>
+	<hr>
+	</div>
+	<p style="color: black!important ;margin-left: 23px!important ;text-align: justify!important ;" >
+		<b>NAME:</b>{{data['view'][0]['u_fname']}}<br>
+		<b>PHONE:</b>{{data['view'][0]['u_phone']}}<br>
+		<b>EMAIL:</b>{{data['view'][0]['username']}}<br>
+		<b>ADDRESS:</b>{{data['view'][0]['u_hname']}}, {{data['view'][0]['u_street']}}, {{data['view'][0]['u_district']}}<br>
+		<b>DATE:</b>{{data['view'][0]['order_date']}}<br>
+	</p>
+		
+
+		<!-- <br> PIN:{{data['view'][0]['u_pin']}}<br> -->
+	
+	<hr>
+<table class="table " style="width: 900px!important ;margin-bottom: 50px!important ;box-shadow: 0px 2px 20px rgb(41, 41, 41)!important ;background-color: white!important ;"  align="center">
+	<td style="background-color: rgb(230, 99, 177)!important ;color: rgb(28, 26, 27)!important ;" colspan="9">Bill no: GALLARIA10{{data['view'][0]['cm_id']}}</td>
+	<tr style="border-bottom: 1px solid lightgrey!important ;" align="center">
+		<th>Index</th>
+		<th>Item name</th>
+		<th>Price</th>
+		
+		
+	</tr>
+	<tr style="border-bottom: 1px solid lightgrey!important ; align-items: center !important;" align="center">
+        {% for i in data['view'] %}
+        <tr align="center">
+		<td>{{loop.index}}</td>
+        <td>{{i['item_name']}}</td>
+		<td>{{i['finalcost']}}</td>
+		
+		
+		</tr>
+        {% endfor %}
+	</tr>
+	<td align="right" colspan="9">Total: {{ data['view'][0]['c_tot_amount']}}</td>
+</table>
+</div>
+</center>
+<script type="text/javascript">
+	function hello(){
+		window.print() ;
+	}
+
+	function display() { 
+		window.print() ;
+} 
+function printdiv(){
+	window.print();
+	function displayDateTime() {
+		var today = new Date();
+		var date = today.toDateString();
+		var time = today.toLocaleTimeString();
+		document.getElementById("datetime").innerHTML = date + " " + time;
+	}
+}
+
+
+</script>
+</body>
+</html>

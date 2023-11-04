@@ -1,0 +1,73 @@
+<body onload="printDiv()">
+    <div id="div_print" >
+        <center>
+            <link rel="stylesheet" href="static/assets/css/style-starter.css">
+<style>
+table {
+    width: 90%;
+    margin-right: 0 auto;
+}
+</style>
+            <font style="font-family:times new roman">
+                <br><br>
+            <h1 style="color: #3ccadd;"><b>GALLERIA<b></h1>
+                <p>
+                    0926k 4th block, 
+                    Attingal, 
+                    Trivandrum ,
+                              <br><br>
+                          <strong>Phone:</strong> +91 9074772635<br> 
+                          <strong>Email:</strong> galleria@mail.com<br> 
+                        </p> 
+            <h1 style="padding-top: 20px;font-size: 60px;">SALES REPORT</h1><br>`
+            <!-- <h1>View Sales</h1> -->
+            <span style="position: absolute;left: 60px;"> REPORT DATE AND TIME: <span id="datetime"></span></span>
+            <br/>
+            <br/>
+<table border=1 class="table table-secondary table-striped " style="color: black;background:white;opacity: 0.85;">
+    <tr>
+        <th>Sl.no</th>
+            
+                <th>Item Name</th>
+                 <th>Earning</th>
+            
+
+    </tr>
+            
+  
+            {% for row in data['r']%}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <!-- <td><img src="/{{ row['item_image'] }}" width="100" height="100" alt=""></td> -->
+                <!-- <td>{{ row['u_fname'] }}</td> -->
+                <td>{{ row['item_name'] }}</td>
+                <!-- <td>{{ row['item_des'] }}</td> -->
+                <td>{{ row['item_price'] }}</td>
+                <!-- <td>{{ row['cart_status'] }}</td> -->
+            
+                
+            </tr>
+            {% endfor %}
+            </table>
+            <br/>
+            <br/>
+     
+            Total:{{ data['earn'] }}
+
+<script> 
+    function printDiv() { 
+      var divContents = document.getElementById("div_print").innerHTML; 
+      var a = window.open('', '', 'height=500, width=500'); 
+      a.document.write(divContents); 
+      a.document.close(); 
+      a.print(); 
+      var today = new Date();
+      var date = today.toDateString();
+      var time = today.toLocaleTimeString();
+      document.getElementById("datetime").innerHTML = date + " " + time; 
+    } 
+
+    document.querySelector("#datetime").innerHTML = new Date().toLocaleString('en-GB', { timeZone: 'IST' });
+    window.print();
+
+  </script>

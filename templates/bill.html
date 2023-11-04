@@ -1,0 +1,323 @@
+
+ 
+<script> 
+    function printDiv() { 
+      print()
+
+    } 
+  </script> 
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Glory Luxe</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+  </head>
+  </html>
+  <body onload="printDiv()">
+  <div id="div_print" >
+
+
+    <header class="clearfix">
+      <div>
+      <h2 style="font-size: 40px;font-family: Centaur;color: #9d33a9 !important;margin-bottom:-1em;">GLORY LUXE</h2>
+      </div> 
+
+
+      <div id="company">
+        
+         Billion street,<br>
+                   AB-04 block,
+                Ernakulam <br><br>
+              <strong>Phone:</strong> +91 9765856476<br> 
+              <strong>Email:</strong> gloryluxe@gmail.com<br>  
+      </div>
+     
+    </header>
+    <main>
+ 
+        
+
+      <div id="details" class="clearfix">
+        <div id="client">
+          <div class="to">INVOICE TO:</div>
+          <h2 class="name">{{ data['res'][0]['c_fname'] }}</h2>
+        
+       <!--    <div class="address">796 Silver Harbour, TX 79273, US</div>
+          <div class="email"><a href="mailto:john@example.com">john@example.com</a></div> -->
+        </div>
+ <!--        <div id="invoice">
+          <h1>INVOICE </h1>
+          <div class="date">Date of Invoice: 01/06/2014</div>
+         
+        </div> -->
+      </div>
+      <table border="0" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th>Sl. no</th> 
+            <th>Service</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Rate</th>
+            <th>Time Slot</th>
+           
+       <!--  <th>Total Amount</th> -->
+        
+           <a class="btn bg-white btn-light mx-1px text-95" href="" onclick="printDiv()" data-title="Print">
+                    <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
+                </a>
+
+          </tr>
+        </thead>
+           
+        
+        
+        <tbody>
+          {%  for row in data['res'] %}
+            <tr>
+                <td style="background: #9d33a9 !important;" class="no">{{loop.index}}</td>
+                <td><img src="/{{ row['s_image'] }}" width="50" height="50" alt=""></td>
+                <td>{{ row['subcategory_name'] }} {{ row['category_name'] }}</td>
+                <td> {{ row['date'] }} </td>
+                <td>{{ row['total_price'] }}</td>
+                <td> pending </td>
+              
+       <!--      <td class="total"><?php echo $row['total_amt'] ?></td> -->
+                  
+                     </tr>
+                     {% endfor %}
+         
+         <!--   -->
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3"></td>
+            <td colspan="2">SUBTOTAL</td>
+            <td>{{ data['res'][0]['total_price'] }}</td>
+          </tr>
+         <!--  <tr>
+            <td colspan="2"></td>
+            <td colspan="2">TAX 25%</td>
+            <td>$1,300.00</td>
+          </tr> -->
+         <!--  <tr>
+            <td colspan="2"></td>
+            <td colspan="2">GRAND TOTAL</td>
+            <td>$6,500.00</td>
+          </tr> -->
+
+        </tfoot>
+      </table>
+      <div id="thanks">Thank you!</div>
+     <!--  <div id="notices">
+        <div>NOTICE:</div>
+        <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+      </div> -->
+      
+    </main>
+   
+  </body>
+
+
+
+<style type="text/css">
+  @font-face {
+  font-family: SourceSansPro;
+  src: url(SourceSansPro-Regular.ttf);
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+a {
+  color: #0087C3;
+  text-decoration: none;
+}
+
+body {
+  position: relative;
+  width: 21cm;  
+  height: 29.7cm; 
+  margin: 0 auto; 
+  color: #555555;
+  background: #FFFFFF; 
+  font-family: Arial, sans-serif; 
+  font-size: 14px; 
+  font-family: SourceSansPro;
+}
+
+header {
+  padding: 10px 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #AAAAAA;
+}
+
+#logo {
+  float: left;
+  margin-top: 8px;
+}
+
+#logo img {
+  height: 70px;
+}
+
+#company {
+  float: right;
+  text-align: right;
+}
+
+
+#details {
+  margin-bottom: 50px;
+}
+
+#client {
+  padding-left: 6px;
+  border-left: 6px solid #0087C3;
+  float: left;
+}
+
+#client .to {
+  color: #777777;
+}
+
+h2.name {
+  font-size: 1.4em;
+  font-weight: normal;
+  margin: 0;
+}
+
+#invoice {
+  float: right;
+  text-align: right;
+}
+
+#invoice h1 {
+  color: #0087C3;
+  font-size: 2.4em;
+  line-height: 1em;
+  font-weight: normal;
+  margin: 0  0 10px 0;
+}
+
+#invoice .date {
+  font-size: 1.1em;
+  color: #777777;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+}
+
+table th,
+table td {
+  padding: 30px;
+  background: #EEEEEE;
+  text-align: center;
+  border-bottom: 1px solid #FFFFFF;
+}
+
+table th {
+  white-space: nowrap;        
+  font-weight: normal;
+}
+
+table td {
+  text-align: right;
+}
+
+table td h3{
+  color: #9d33a9;
+  font-size: 1.2em;
+  font-weight: normal;
+  margin: 0 0 0.2em 0;
+}
+
+table .no {
+  color: #FFFFFF;
+  font-size: 1.6em;
+  background:#9d33a9;
+}
+
+table .desc {
+  text-align: left;
+}
+
+table .unit {
+  background: #DDDDDD;
+}
+
+
+
+table .total {
+  background: #9d33a9;
+  color: #FFFFFF;
+}
+
+table td.unit,
+table td.qty,
+table td.total {
+  font-size: 1.2em;
+}
+
+table tbody tr:last-child td {
+  border: none;
+}
+
+table tfoot td {
+  padding: 10px 20px;
+  background: #FFFFFF;
+  border-bottom: none;
+  font-size: 1.2em;
+  white-space: nowrap; 
+  border-top: 1px solid #AAAAAA; 
+}
+
+table tfoot tr:first-child td {
+  border-top: none; 
+}
+
+table tfoot tr:last-child td {
+  color: #9d33a9;
+  font-size: 1.4em;
+  border-top: 1px solid #9d33a9; 
+
+}
+
+table tfoot tr td:first-child {
+  border: none;
+}
+
+#thanks{
+  font-size: 2em;
+  margin-bottom: 50px;
+}
+
+#notices{
+  padding-left: 6px;
+  border-left: 6px solid #0087C3;  
+}
+
+#notices .notice {
+  font-size: 1.2em;
+}
+
+footer {
+  color: #777777;
+  width: 100%;
+  height: 30px;
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid #AAAAAA;
+  padding: 8px 0;
+  text-align: center;
+}
+
+
+</style>

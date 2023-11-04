@@ -1,0 +1,97 @@
+{% include 'adminheader.html'%}
+
+
+<style>
+    #products {
+        transition: all .9s;
+
+    }
+
+    #products:hover {
+        transition: all .9s;
+        background-color: rgb(235, 235, 235);
+        transform: scale(1.1);
+    }
+</style>
+<center>
+    <form method="post">
+
+        <table>
+            <tr>
+                <td><input style="padding: 6px 5px;border-radius: 5px;margin-right: 10px;" type="date" name="daily">
+                </td>
+                <td><input style="padding: 6px 5px;border-radius: 5px;margin-right: 10px;" type="month" name="monthly">
+                </td>
+                <td><input class="btn btn-warning" type="submit" name="btn"></td>
+            </tr>
+        </table>
+
+    </form>
+</center>
+
+
+<center>
+    <h1> Sales</h1>
+
+    <table class="table"
+        style="width: 1200px;box-shadow: 2px 4px 6px lightgrey,-1px -2px 6px rgb(235, 235, 235);margin-top: 100px;">
+        <tr>
+
+            <th>Sl.no</th>
+            <th>Customer</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th colspan="4">Item Details</th>
+
+            <!--<th>Item</th>-->
+            <!--<th>Customer</th>-->
+            <!--<th>Item Name</th>-->
+
+            <!--<th>Item Description</th>-->
+            <!--<th>Rate</th>-->
+            <!--<th>Date</th>-->
+        </tr>
+        {% for row in data['report'] %}
+            <tr>
+                <td>{{row['u_fname']}} {{row['u_lname']}} </td>
+            </tr>
+            {% for child in row['cart_children'] %}
+                <tr id="products" style="border-bottom: 1px solid lightgrey;">
+                    <td><img src="/{{ row['item_image'] }}" width="100" height="100" alt=""></td>
+                    <td>{{ row['u_fname'] }}</td>
+                    <td>{{ row['item_name'] }}</td>
+                    <td>{{ row['item_des'] }}</td>
+                    <td>{{ row['finalcost'] }}</td>
+                    <td>{{ row['order_date'] }}</td>
+                    <td>{{ row['cart_status'] }}</td>
+
+                    {% if row['cart_status']=='paid' %}
+                    <td><a href="assign_cou?cm_id={{ row['cm_id'] }}">Assign to Courier</a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        {% endfor %}
+        </tr>
+    </table>
+    <p style="width: 150px" class="btn btn-info" href="print_sales" onclick="openPrintPurchase()"><b>Print Report</b>
+    </p>
+
+    <script>
+        function openPrintPurchase() {
+            let tableState = document.querySelectorAll("tr");
+            if (tableState.length > 0) {
+                let start_date = document.querySelector("input[name='daily']").value;
+                let end_date = document.querySelector("input[name='monthly']").value;
+                if (start_date && end_date) {
+                    window.location = `/print_sales?daily=${start_date}&monthly=${end_date}`;
+                } else if (start_date) {
+                    window.location = `/print_sales?daily=${start_date}&monthly=${end_date}`;
+                } else if (end_date) {
+                    window.location = `/print_sales?daily=${start_date}&monthly=${end_date}`;
+                } else {
+                    window.location = `/print_sales`;
+                }
+            }
+        }
+    </script>
+</center>

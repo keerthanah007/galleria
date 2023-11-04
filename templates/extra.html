@@ -1,0 +1,11 @@
+if action=="inactive":
+		q="SELECT * FROM `tbl_cart_master` INNER JOIN `tbl_payment` USING (cm_id) INNER JOIN `tbl_delivery` USING (Payment_id) INNER JOIN `tbl_courier` USING (Cour_ID) WHERE `Cour_ID` IN ( SELECT `Cour_ID` FROM `tbl_delivery` ) AND `tbl_cart_master`.Cart_Status <> 'delivered'"
+		exist=select(q)
+		if exist:
+			flash("Cant Deactivate Couriers on Delivery")
+		else:
+			q="update tbl_courier set cou_status='0' where cou_id='%s'"%(id)
+			update(q)
+			q="update tbl_login set login_status='0' where username='%s'"%(uid)
+			update(q)
+		return redirect(url_for('admin.addcourier'))

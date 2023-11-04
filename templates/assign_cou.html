@@ -1,0 +1,87 @@
+{% include 'adminheader.html'%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<center>
+<h3>Add Courier</h3>
+<form method="post" id="form-reg">
+	<div id="reg">
+	<table class="table" style="width:500px">
+		<tr>
+			<th>Courier Agent</th>
+			<td>
+				<select name="cou" class="form-control">
+					<option>Select </option>
+
+					{% for i in data['cou'] %}
+
+					<option value="{{i['cou_id']}}">{{i['cou_name']}}</option>
+
+					{% endfor %}
+					
+				</select>
+			</td>
+		</tr>
+		
+		<td align="center"  colspan="2"><input class="btn btn-primary" type="submit" name="submit" value="submit" ></td>
+	</table>
+	</div>
+</form>
+</center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<style type="text/css">
+		#form-reg{
+			background: url('/static/assets/images/banner-mid.jpg');
+			padding:1rem .4rem;
+			background-size: cover;
+		}
+
+		#reg{
+			background: rgba(0,0,0,.3);
+			width: 60%;
+			border-radius:6px;
+			color: #fff !important;
+
+		}
+		.form-control{
+			/*background: red !important;*/
+			width: 100%
+		}
+		.hope{
+			
+			background: rgba(0, 0, 0, .2);
+
+		}
+		table
+		{
+			border-radius: 20px 0px 20px 0px;
+		}
+	</style>
+
+</body>
+</html>
